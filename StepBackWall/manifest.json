@@ -2,11 +2,11 @@
   "$schema": "https://raw.githubusercontent.com/nike4613/ModSaber-MetadataFileSchema/master/Schema.json",
   "author": "Pespiri",
   "description": "Re-enables the Step Back wall layer",
-  "gameVersion": "1.1.0",
+  "gameVersion": "1.2.0",
   "icon": "StepBackWall.Properties.icon.png",
   "id": "StepBackWall",
   "name": "StepBackWall",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "dependsOn": {
     "BSIPA": "^3.12.22",
     "CustomUI": "^1.5.6"
