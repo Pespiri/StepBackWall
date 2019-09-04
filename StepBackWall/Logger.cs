@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Reflection;
 using System.Diagnostics;
+using System.Reflection;
 using IPALogger = IPA.Logging.Logger;
 using LogLevel = IPA.Logging.Logger.Level;
 
@@ -12,18 +12,26 @@ namespace StepBackWall
 
         public static void Log(string message, LogLevel severity = LogLevel.Info)
         {
-            string caller = new StackTrace()?.GetFrame(1)?.GetMethod()?.ReflectedType?.FullName ?? Assembly.GetCallingAssembly().GetName().Name;
+            string caller = "";
+            if (Configuration.ShowCallSource)
+            {
+                caller = $"{new StackTrace()?.GetFrame(1)?.GetMethod()?.DeclaringType?.FullName ?? Assembly.GetCallingAssembly().GetName().Name} - ";
+            }
 
-            if (log != null) log.Log(severity, $"{caller} - {message}");
-            else Console.WriteLine($"[{Plugin.PluginName}] {severity.ToString().ToUpper()} {caller} - {message}");
+            if (log != null) log.Log(severity, $"{caller}{message}");
+            else Console.WriteLine($"[{Plugin.PluginName}] {severity.ToString().ToUpper()} {caller}{message}");
         }
 
         public static void Log(Exception error, LogLevel severity = LogLevel.Error)
         {
-            string caller = new StackTrace()?.GetFrame(1)?.GetMethod()?.ReflectedType?.FullName ?? Assembly.GetCallingAssembly().GetName().Name;
+            string caller = "";
+            if (Configuration.ShowCallSource)
+            {
+                caller = $"{new StackTrace()?.GetFrame(1)?.GetMethod()?.DeclaringType?.FullName ?? Assembly.GetCallingAssembly().GetName().Name} - ";
+            }
 
             if (log != null) log.Log(severity, error);
-            else Console.WriteLine($"[{Plugin.PluginName}] {severity.ToString().ToUpper()} {caller} - {error.Message}\n{error.StackTrace}");
+            else Console.WriteLine($"[{Plugin.PluginName}] {severity.ToString().ToUpper()} {caller}{error.Message}\n{error.StackTrace}");
         }
     }
 }

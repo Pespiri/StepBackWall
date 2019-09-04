@@ -1,33 +1,28 @@
 ﻿using IPA;
 using IPA.Config;
+using IPA.Loader;
 using IPA.Utilities;
-using IPALogger = IPA.Logging.Logger;
-using LogLevel = IPA.Logging.Logger.Level;
+using StepBackWall.ConfigUtils;
+using StepBackWall.Gameplay;
+using StepBackWall.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using IPALogger = IPA.Logging.Logger;
+using LogLevel = IPA.Logging.Logger.Level;
 
 namespace StepBackWall
 {
     class Plugin : IBeatSaberPlugin, IDisablablePlugin
     {
         public static string PluginName = "StepBackWall";
+        public static SemVer.Version PluginVersion = new SemVer.Version("0.0.0"); // Default
 
         internal static Ref<PluginConfig> config;
         internal static IConfigProvider configProvider;
 
-        public static bool IsStepBackWallEnabled
+        public void Init(IPALogger logger, [Config.Prefer("json")] IConfigProvider cfgProvider, PluginLoader.PluginMetadata metadata)
         {
-            get => config.Value.ReEnableStepBackWall;
-            set => config.Value.ReEnableStepBackWall = value;
-        }
-
-        public void Init(IPALogger logger, [Config.Prefer("json")] IConfigProvider cfgProvider)
-        {
-            if (logger != null)
-            {
-                Logger.log = logger;
-                Logger.Log("Logger prepared", LogLevel.Debug);
-            }
+            Logger.log = logger;
 
             configProvider = cfgProvider;
             config = cfgProvider.MakeLink<PluginConfig>((p, v) =>
@@ -38,24 +33,26 @@ namespace StepBackWall
                 }
                 config = v;
             });
-            Logger.Log("Configuration loaded", LogLevel.Debug);
+
+            if (metadata?.Version != null)
+            {
+                PluginVersion = metadata.Version;
+            }
         }
 
-        public void OnApplicationStart()
-        {
-            Logger.Log($"{Plugin.PluginName} has started", LogLevel.Notice);
-        }
-
-        public void OnApplicationQuit()
-        {
-            configProvider.Store(config.Value);
-        }
+        public void OnApplicationStart() => Load();
+        public void OnApplicationQuit() => Unload();
+        public void OnEnable() => Load("been enabled");
+        public void OnDisable() => Unload();
 
         public void OnActiveSceneChanged(Scene prevScene, Scene nextScene)
         {
             if (nextScene.name == "GameCore")
             {
-                new GameObject(Plugin.PluginName).AddComponent<StepBackWall>();
+                if (Configuration.IsStepBackWallEnabled)
+                {
+                    new GameObject(PluginName).AddComponent<StepBackWallEnabler>();
+                }
             }
         }
 
@@ -63,8 +60,8 @@ namespace StepBackWall
         {
             if (scene.name == "MenuCore")
             {
-                InGameSettingsUI.CreateGameplaySetupMenu();
-                InGameSettingsUI.CreateSettingsMenu();
+                SettingsUI.CreateGameplaySetupMenu();
+                SettingsUI.CreateSettingsMenu();
             }
         }
 
@@ -72,7 +69,15 @@ namespace StepBackWall
         public void OnUpdate() { }
         public void OnFixedUpdate() { }
 
-        public void OnEnable() { }
-        public void OnDisable() { }
+        private void Load(string msg = "started")
+        {
+            Configuration.Load();
+            Logger.Log($"{PluginName} v{PluginVersion} has {msg}.", LogLevel.Notice);
+        }
+
+        private void Unload()
+        {
+            Configuration.Save();
+        }
     }
 }

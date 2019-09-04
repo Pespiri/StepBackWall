@@ -4,24 +4,24 @@ using CustomUI.GameplaySettings;
 using LogLevel = IPA.Logging.Logger.Level;
 using UnityEngine;
 
-namespace StepBackWall
+namespace StepBackWall.UI
 {
-    public class InGameSettingsUI : MonoBehaviour
+    public class SettingsUI : MonoBehaviour
     {
         private static ToggleOption stepBackWallToggle;
         private static BoolViewController stepBackWallController;
 
-        private static readonly Sprite optionIcon = UIUtilities.LoadSpriteFromResources($"{Plugin.PluginName}.Properties.icon_playersettings.png");
+        private static readonly Sprite optionIcon = UIUtilities.LoadSpriteFromResources($"{Plugin.PluginName}.Resources.icon_playersettings.png");
 
         /// <summary>
         /// Adds an additional submenu in the "Settings" page
         /// </summary>
         public static void CreateSettingsMenu()
         {
-            SubMenu subMenu = SettingsUI.CreateSubMenu(Plugin.PluginName);
+            SubMenu subMenu = CustomUI.Settings.SettingsUI.CreateSubMenu(Plugin.PluginName);
 
             stepBackWallController = subMenu.AddBool("Enable 'Step Back' wall", "Default = On");
-            stepBackWallController.GetValue += delegate { return Plugin.IsStepBackWallEnabled; };
+            stepBackWallController.GetValue += delegate { return Configuration.IsStepBackWallEnabled; };
             stepBackWallController.SetValue += delegate (bool value)
             {
                 ChangeStepBackWallState(value);
@@ -35,10 +35,10 @@ namespace StepBackWall
         public static void CreateGameplaySetupMenu()
         {
             stepBackWallToggle = GameplaySettingsUI.CreateToggleOption(GameplaySettingsPanels.PlayerSettingsRight, "Enable 'Step Back' wall", "Default: On", optionIcon);
-            stepBackWallToggle.GetValue = Plugin.IsStepBackWallEnabled;
+            stepBackWallToggle.GetValue = Configuration.IsStepBackWallEnabled;
             stepBackWallToggle.OnToggle += (bool value) =>
             {
-                Plugin.IsStepBackWallEnabled = value;
+                Configuration.IsStepBackWallEnabled = value;
                 Logger.Log($"Toggle is very '{(value ? "toggled" : "untoggled")}! Value is now '{value}'", LogLevel.Debug);
             };
         }
