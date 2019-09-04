@@ -1,6 +1,4 @@
-﻿using LogLevel = IPA.Logging.Logger.Level;
-
-namespace StepBackWall
+﻿namespace StepBackWall
 {
     public static class Configuration
     {
@@ -15,8 +13,6 @@ namespace StepBackWall
             {
                 ShowCallSource = (bool)Plugin.config.Value.Logging["ShowCallSource"];
             }
-
-            Logger.Log("Configuration has been loaded.", LogLevel.Debug);
         }
 
         public static void Save()

@@ -1,7 +1,6 @@
 ﻿using CustomUI.Settings;
 using CustomUI.Utilities;
 using CustomUI.GameplaySettings;
-using LogLevel = IPA.Logging.Logger.Level;
 using UnityEngine;
 
 namespace StepBackWall.UI
@@ -25,7 +24,6 @@ namespace StepBackWall.UI
             stepBackWallController.SetValue += delegate (bool value)
             {
                 ChangeStepBackWallState(value);
-                Logger.Log($"'Enable 'Step Back' wall' (IsStepBackWallEnabled) in the main settings is set to '{value}'", LogLevel.Debug);
             };
         }
 
@@ -34,12 +32,11 @@ namespace StepBackWall.UI
         /// </summary>
         public static void CreateGameplaySetupMenu()
         {
-            stepBackWallToggle = GameplaySettingsUI.CreateToggleOption(GameplaySettingsPanels.PlayerSettingsRight, "Enable 'Step Back' wall", "Default: On", optionIcon);
+            stepBackWallToggle = GameplaySettingsUI.CreateToggleOption(GameplaySettingsPanels.PlayerSettingsRight, "Enable 'Step Back' wall", "Default = On", optionIcon);
             stepBackWallToggle.GetValue = Configuration.IsStepBackWallEnabled;
             stepBackWallToggle.OnToggle += (bool value) =>
             {
                 Configuration.IsStepBackWallEnabled = value;
-                Logger.Log($"Toggle is very '{(value ? "toggled" : "untoggled")}! Value is now '{value}'", LogLevel.Debug);
             };
         }
 
