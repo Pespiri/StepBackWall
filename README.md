@@ -13,7 +13,7 @@ Gotten tired of the walls already? No worries! You can turn it off from the sett
 
 ## For developers
 
-### Contributing to CustomNotes
+### Contributing to StepBackWall
 In order to build this project, please create the file `StepBackWall.csproj.user` and add your Beat Saber directory path to it in the project directory like this.
 This file should not be uploaded to GitHub and is in the .gitignore.
 
