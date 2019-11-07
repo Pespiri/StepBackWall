@@ -41,9 +41,8 @@ namespace StepBackWall
             }
         }
 
-        public void OnApplicationStart() => Load();
         public void OnApplicationQuit() => Unload();
-        public void OnEnable() => Load("been enabled");
+        public void OnEnable() => Load();
         public void OnDisable() => Unload();
 
         public void OnActiveSceneChanged(Scene prevScene, Scene nextScene)
@@ -66,14 +65,15 @@ namespace StepBackWall
             }
         }
 
+        public void OnApplicationStart() { }
         public void OnSceneUnloaded(Scene scene) { }
         public void OnUpdate() { }
         public void OnFixedUpdate() { }
 
-        private void Load(string msg = "started")
+        private void Load()
         {
             Configuration.Load();
-            Logger.Log($"{PluginName} v{PluginVersion} has {msg}.", LogLevel.Notice);
+            Logger.Log($"{PluginName} v{PluginVersion} has started.", LogLevel.Notice);
         }
 
         private void Unload()
