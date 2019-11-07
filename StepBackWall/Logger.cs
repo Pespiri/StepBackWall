@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StepBackWall.Settings;
+using System;
 using System.Diagnostics;
 using System.Reflection;
 using IPALogger = IPA.Logging.Logger;

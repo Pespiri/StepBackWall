@@ -2,9 +2,10 @@
 using IPA.Config;
 using IPA.Loader;
 using IPA.Utilities;
-using StepBackWall.ConfigUtils;
 using StepBackWall.Gameplay;
-using StepBackWall.UI;
+using StepBackWall.Settings;
+using StepBackWall.Settings.UI;
+using StepBackWall.Settings.Utilities;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using IPALogger = IPA.Logging.Logger;

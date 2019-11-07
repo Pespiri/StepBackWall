@@ -1,9 +1,9 @@
-﻿using CustomUI.Settings;
+﻿using CustomUI.GameplaySettings;
+using CustomUI.Settings;
 using CustomUI.Utilities;
-using CustomUI.GameplaySettings;
 using UnityEngine;
 
-namespace StepBackWall.UI
+namespace StepBackWall.Settings.UI
 {
     public class SettingsUI : MonoBehaviour
     {

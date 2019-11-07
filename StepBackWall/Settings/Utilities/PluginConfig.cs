@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace StepBackWall.ConfigUtils
+namespace StepBackWall.Settings.Utilities
 {
     internal class PluginConfig
     {

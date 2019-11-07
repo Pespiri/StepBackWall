@@ -1,4 +1,4 @@
-﻿namespace StepBackWall
+﻿namespace StepBackWall.Settings
 {
     public static class Configuration
     {
