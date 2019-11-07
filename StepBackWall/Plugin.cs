@@ -73,7 +73,7 @@ namespace StepBackWall
         private void Load()
         {
             Configuration.Load();
-            Logger.Log($"{PluginName} v{PluginVersion} has started.", LogLevel.Notice);
+            Logger.Log($"{PluginName} v{PluginVersion} has started.", LogLevel.Info);
         }
 
         private void Unload()
