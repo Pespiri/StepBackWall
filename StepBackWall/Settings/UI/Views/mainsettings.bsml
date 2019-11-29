@@ -1,0 +1,6 @@
+﻿<settings-container>
+  <horizontal>
+    <text text='StepBackWall Settings' font-size='5'></text>
+  </horizontal>
+  <bool-setting text='Enable &apos;Step Back&apos; wall' value='enable-stepback-wall' hover-hint='Default = On'></bool-setting>
+</settings-container>

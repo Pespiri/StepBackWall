@@ -35,8 +35,8 @@
     <Reference Include="Assembly-CSharp">
       <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\Assembly-CSharp.dll</HintPath>
     </Reference>
-    <Reference Include="BeatSaberCustomUI">
-      <HintPath>$(BeatSaberDir)\Plugins\BeatSaberCustomUI.dll</HintPath>
+    <Reference Include="BSML">
+      <HintPath>$(BeatSaberDir)\Plugins\BSML.dll</HintPath>
     </Reference>
     <Reference Include="IPA.Loader">
       <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\IPA.Loader.dll</HintPath>
@@ -51,9 +51,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Settings\Configuration.cs" />
-    <Compile Include="Settings\UI\SettingsUI.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Plugin.cs" />
+    <Compile Include="Settings\UI\MainSettings.cs" />
     <Compile Include="Settings\Utilities\PluginConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Gameplay\StepBackWallEnabler.cs" />
@@ -63,6 +63,7 @@
     <EmbeddedResource Include="Resources\description.md" />
     <EmbeddedResource Include="Resources\icon.png" />
     <EmbeddedResource Include="Resources\icon_playersettings.png" />
+    <EmbeddedResource Include="Settings\UI\Views\mainsettings.bsml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
