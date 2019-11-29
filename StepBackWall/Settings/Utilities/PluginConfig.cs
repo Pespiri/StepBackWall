@@ -2,7 +2,7 @@
 
 namespace StepBackWall.Settings.Utilities
 {
-    internal class PluginConfig
+    public class PluginConfig
     {
         public bool RegenerateConfig = true;
 

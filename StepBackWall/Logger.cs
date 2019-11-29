@@ -7,7 +7,7 @@ using LogLevel = IPA.Logging.Logger.Level;
 
 namespace StepBackWall
 {
-    public static class Logger
+    public class Logger
     {
         internal static IPALogger log { private get; set; }
 

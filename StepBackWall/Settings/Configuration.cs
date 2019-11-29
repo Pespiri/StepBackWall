@@ -1,6 +1,6 @@
 ﻿namespace StepBackWall.Settings
 {
-    public static class Configuration
+    public class Configuration
     {
         public static bool IsStepBackWallEnabled;
         public static bool ShowCallSource;
