@@ -7,8 +7,8 @@ namespace StepBackWall.Settings.UI
         [UIValue("enable-stepback-wall")]
         public bool IsStepBackWallEnabled
         {
-            get => Configuration.IsStepBackWallEnabled;
-            set => Configuration.IsStepBackWallEnabled = value;
+            get => Configuration.EnableStepBackWalls;
+            set => Configuration.EnableStepBackWalls = value;
         }
     }
 }
