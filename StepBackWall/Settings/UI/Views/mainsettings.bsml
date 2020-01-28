@@ -1,8 +1,8 @@
-﻿<settings-container>
+﻿<settings-container xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd'>
   <horizontal>
     <text text='StepBackWall Settings' font-size='5' />
   </horizontal>
-  
+
   <bool-setting text='Enable &apos;Step Back&apos; wall' value='enable-stepback-wall'
                 hover-hint='Default = On' />
 </settings-container>
