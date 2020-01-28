@@ -47,8 +47,8 @@
       <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\MainAssembly.dll</HintPath>
 	  <private>false</private>
     </Reference>
-    <Reference Include="SemVer.1.2.0.0">
-      <HintPath>$(BeatSaberDir)\Libs\SemVer.1.2.0.0.dll</HintPath>
+    <Reference Include="SemVer.1.2.2.0">
+      <HintPath>$(BeatSaberDir)\Libs\SemVer.1.2.2.0.dll</HintPath>
 	  <private>false</private>
     </Reference>
     <Reference Include="System" />
