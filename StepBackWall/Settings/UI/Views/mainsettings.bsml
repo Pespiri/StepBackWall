@@ -4,5 +4,5 @@
   </horizontal>
 
   <bool-setting text='Enable &apos;Step Back&apos; wall' value='enable-stepback-wall'
-                hover-hint='Default = On' />
+                hover-hint='Not available in 90/360 levels'/>
 </settings-container>
