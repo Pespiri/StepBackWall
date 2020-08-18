@@ -1,25 +1,25 @@
-﻿using BeatSaberMarkupLanguage.Settings;
-using IPA;
+﻿using IPA;
 using IPA.Config;
 using IPA.Loader;
 using StepBackWall.Gameplay;
 using StepBackWall.Settings;
 using StepBackWall.Settings.UI;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using IPALogger = IPA.Logging.Logger;
 
 namespace StepBackWall
 {
-    public class Plugin : IBeatSaberPlugin, IDisablablePlugin
+    [Plugin(RuntimeOptions.DynamicInit)]
+    public class Plugin
     {
-        public static string PluginName = "StepBackWall";
-        public static SemVer.Version PluginVersion = new SemVer.Version("0.0.0"); // Default
+        public static string PluginName => "StepBackWall";
+        public static SemVer.Version PluginVersion { get; private set; } = new SemVer.Version("0.0.0"); // Default
 
-        public void Init(IPALogger logger, [Config.Prefer("json")] IConfigProvider cfgProvider, PluginLoader.PluginMetadata metadata)
+        [Init]
+        public void Init(IPALogger logger, Config config, PluginMetadata metadata)
         {
             Logger.log = logger;
-            Configuration.Init(cfgProvider);
+            Configuration.Init(config);
 
             if (metadata?.Version != null)
             {
@@ -27,40 +27,44 @@ namespace StepBackWall
             }
         }
 
+        [OnEnable]
         public void OnEnable() => Load();
+        [OnDisable]
         public void OnDisable() => Unload();
-        public void OnApplicationQuit() => Unload();
 
-        public void OnActiveSceneChanged(Scene prevScene, Scene nextScene)
+        private void OnGameSceneLoaded()
         {
-            if (nextScene.name == "GameCore")
+            if (Configuration.EnableStepBackWalls && !BS_Utils.Gameplay.Gamemode.SelectedCharacteristic.containsRotationEvents)
             {
-                if (Configuration.EnableStepBackWalls)
-                {
-                    new GameObject(PluginName).AddComponent<StepBackWallEnabler>();
-                }
-            }
-            else if (nextScene.name == "MenuViewControllers" && prevScene.name == "EmptyTransition")
-            {
-                BSMLSettings.instance.AddSettingsMenu("StepBack Wall", "StepBackWall.Settings.UI.Views.mainsettings.bsml", MainSettings.instance);
+                new GameObject(PluginName).AddComponent<StepBackWallEnabler>();
             }
         }
-
-        public void OnApplicationStart() { }
-        public void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode) { }
-        public void OnSceneUnloaded(Scene scene) { }
-        public void OnUpdate() { }
-        public void OnFixedUpdate() { }
 
         private void Load()
         {
             Configuration.Load();
-            Logger.log.Info($"{PluginName} v{PluginVersion} has started.");
+            SettingsUI.CreateMenu();
+            AddEvents();
+
+            Logger.log.Info($"{PluginName} v.{PluginVersion} has started.");
         }
 
         private void Unload()
         {
+            RemoveEvents();
             Configuration.Save();
+            SettingsUI.RemoveMenu();
+        }
+
+        private void AddEvents()
+        {
+            RemoveEvents();
+            BS_Utils.Utilities.BSEvents.gameSceneLoaded += OnGameSceneLoaded;
+        }
+
+        private void RemoveEvents()
+        {
+            BS_Utils.Utilities.BSEvents.gameSceneLoaded -= OnGameSceneLoaded;
         }
     }
 }
