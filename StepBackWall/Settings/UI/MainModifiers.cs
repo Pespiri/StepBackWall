@@ -13,6 +13,6 @@ namespace StepBackWall.Settings.UI
         }
 
         [UIAction("trigger-toggle")]
-        void TriggerEnable(bool val) => IsStepBackWallEnabled = val;
+        public void TriggerEnable(bool val) => IsStepBackWallEnabled = val;
     }
 }

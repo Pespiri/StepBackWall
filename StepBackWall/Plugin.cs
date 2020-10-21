@@ -34,7 +34,7 @@ namespace StepBackWall
 
         private void OnGameSceneLoaded()
         {
-            if (Configuration.EnableStepBackWalls && !BS_Utils.Gameplay.Gamemode.SelectedCharacteristic.containsRotationEvents)
+            if (Configuration.EnableStepBackWalls && !BS_Utils.Plugin.LevelData.GameplayCoreSceneSetupData.difficultyBeatmap.parentDifficultyBeatmapSet.beatmapCharacteristic.containsRotationEvents)
             {
                 new GameObject(PluginName).AddComponent<StepBackWallEnabler>();
             }

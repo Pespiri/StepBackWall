@@ -1,8 +1,8 @@
 ﻿<bg xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd'>
-  <settings-container pref-width='50' pref-height='5'>
-    <modifier text='Enable' value='enable-stepback-wall'
+  <modifier-container pref-width='50' pref-height='5'>
+    <modifier text='StepBack Wall' value='enable-stepback-wall'
               hover-hint='Not available in 90/360 levels'
               source='StepBackWall.Resources.icon_playersettings.png'
               on-change='trigger-toggle'/>
-  </settings-container>
+  </modifier-container>
 </bg>

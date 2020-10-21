@@ -11,9 +11,9 @@ namespace StepBackWall.Gameplay
             try
             {
                 IList<MoveBackWall> moveBackWalls = Resources.FindObjectsOfTypeAll<MoveBackWall>();
-                if (moveBackWalls.Count > 0)
+                foreach (MoveBackWall moveBackWall in moveBackWalls)
                 {
-                    moveBackWalls[0].gameObject.SetActive(true);
+                    moveBackWall.gameObject.SetActive(true);
                 }
             }
             catch (Exception ex)
