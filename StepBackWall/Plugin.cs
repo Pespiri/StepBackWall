@@ -1,4 +1,5 @@
-﻿using IPA;
+﻿using Hive.Versioning;
+using IPA;
 using IPA.Config;
 using IPA.Loader;
 using StepBackWall.Gameplay;
@@ -13,7 +14,7 @@ namespace StepBackWall
     public class Plugin
     {
         public static string PluginName => "StepBackWall";
-        public static SemVer.Version PluginVersion { get; private set; } = new SemVer.Version("0.0.0"); // Default
+        public static Version PluginVersion { get; private set; } = Version.Zero;
 
         [Init]
         public void Init(IPALogger logger, Config config, PluginMetadata metadata)
@@ -21,9 +22,9 @@ namespace StepBackWall
             Logger.log = logger;
             Configuration.Init(config);
 
-            if (metadata?.Version != null)
+            if (metadata?.HVersion != null)
             {
-                PluginVersion = metadata.Version;
+                PluginVersion = metadata.HVersion;
             }
         }
 
