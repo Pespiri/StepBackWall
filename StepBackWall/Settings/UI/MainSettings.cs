@@ -10,5 +10,11 @@ namespace StepBackWall.Settings.UI
             get => Configuration.EnableStepBackWalls;
             set => Configuration.EnableStepBackWalls = value;
         }
+        [UIValue("fade-in-distance")]
+        public float FadeInDistance
+        {
+            get => Configuration.FadeInDistance;
+            set => Configuration.FadeInDistance = value;
+        }
     }
 }
