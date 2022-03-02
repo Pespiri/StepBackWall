@@ -5,4 +5,5 @@
 
   <bool-setting text='Enable &apos;Step Back&apos; wall' value='enable-stepback-wall'
                 hover-hint='Not available in 90/360 levels'/>
+	<slider-setting text='Fade In Distance' value='fade-in-distance' increment='0.1' min='0' max='2' bind-value='true' />
 </settings-container>
